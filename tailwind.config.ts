@@ -4,8 +4,11 @@ export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      colors: {
-        background: "#202023",
+      fontFamily: {
+        inter: ["Inter", "sans-serif"],
+      },
+      maxWidth: {
+        "8xl": "90rem",
       },
     },
   },
