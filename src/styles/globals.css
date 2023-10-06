@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  @apply bg-background text-white;
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    @apply font-inter;
+  }
 }
