@@ -7,13 +7,11 @@ const Home = () => {
       <Head>
         <title>droprr</title>
         <meta name="description" content="Amazon product price tracker" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/assets/favicon.svg" />
       </Head>
-      <main>
-        droprr
-      </main>
+      <main>droprr</main>
     </>
   );
-}
+};
 
 export default Home;
