@@ -2,7 +2,7 @@ import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { Inter } from "next/font/google";
-import Layout from "~/components/layout";
+import Layout from "~/components/Layout";
 
 import { api } from "~/utils/api";
 
