@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import Searchbar from "~/components/Searchbar";
 
 const Home = () => {
   return (
@@ -29,9 +30,11 @@ const Home = () => {
             </p>
 
             <div className="mt-6">
-              <button className="bg-primary rounded-md p-3 text-lg font-semibold transition-all duration-200 hover:bg-green-600">
-                Start Tracking
-              </button>
+              <button className="cta-button">Start Tracking</button>
+            </div>
+
+            <div>
+              <Searchbar />
             </div>
           </div>
         </div>
