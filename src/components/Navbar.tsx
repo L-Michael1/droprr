@@ -11,7 +11,7 @@ const Navbar = () => {
       <nav className="flex items-center justify-between px-6 py-4 md:px-20">
         <Link href="/" className="flex items-center gap-2">
           <IoPricetagsOutline size={"1.5rem"} className="text-green-500" />
-          <p className="text-2xl font-bold text-black">droprr</p>
+          <p className="text-2xl font-bold text-gray-900">droprr</p>
         </Link>
 
         <div className="flex items-center gap-5">
