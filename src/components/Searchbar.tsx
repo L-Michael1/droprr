@@ -38,7 +38,7 @@ const Searchbar = () => {
   };
 
   return (
-    <div className="mt-12 flex flex-wrap gap-4">
+    <div className="mt-12 flex flex-wrap gap-4 px-6 py-4 md:px-20">
       <input
         type="text"
         value={link}
@@ -55,7 +55,7 @@ const Searchbar = () => {
         onClick={handleClickSubmit}
         disabled={isLoading}
       >
-        Track
+        {isLoading ? "Tracking..." : "Track"}
       </button>
     </div>
   );

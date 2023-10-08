@@ -25,7 +25,7 @@ const Products = () => {
   return (
     <Layout>
       <Searchbar />
-      <div>
+      <div className="px-6 py-4 md:px-20">
         {data.map((product) => {
           return (
             <div key={product.id}>
