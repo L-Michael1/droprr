@@ -11,7 +11,7 @@ const Searchbar = () => {
     onSuccess: () => {
       setLink("");
       toast.success("Added product to track!");
-      // TODO: Refresh the list of tracked products
+      void ctx.product.getAll.invalidate();
     },
     onError: (e) => {
       const errorMessage = e.data?.zodError?.fieldErrors?.content;
