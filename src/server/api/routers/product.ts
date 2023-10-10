@@ -47,6 +47,7 @@ export const productRouter = createTRPCRouter({
             highestPrice: scrapedProduct.highestPrice,
             averagePrice: scrapedProduct.averagePrice,
             isOutOfStock: scrapedProduct.isOutOfStock,
+            currency: scrapedProduct.currency,
             priceHistory: {
               create: [
                 {

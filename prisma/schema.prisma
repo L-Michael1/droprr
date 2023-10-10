@@ -68,6 +68,7 @@ model Product {
     highestPrice        Float    @default(0)
     averagePrice        Float    @default(0)
     isOutOfStock        Boolean  @default(false)
+    currency            String   @default("$")
     priceHistory        PriceHistory[]
     userId              String
     createdAt           DateTime @default(now())

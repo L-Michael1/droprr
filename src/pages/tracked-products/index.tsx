@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import React from "react";
 import Layout from "~/components/Layout";
+import ProductCard from "~/components/ProductCard";
 import Searchbar from "~/components/Searchbar";
 import { api } from "~/utils/api";
 
@@ -25,16 +26,12 @@ const Products = () => {
   return (
     <Layout>
       <Searchbar />
-      <div className="px-6 py-4 md:px-20">
-        {data.map((product) => {
-          return (
-            <div key={product.id}>
-              <div>{product.name}</div>
-              <div>{product.url}</div>
-              <div>{product.currentPrice}</div>
-            </div>
-          );
-        })}
+      <div className="flex w-full justify-center px-6 py-12 md:px-20">
+        <div className="flex w-full flex-wrap gap-x-9 gap-y-16">
+          {data.map((product) => {
+            return <ProductCard {...product} key={product.id} />;
+          })}
+        </div>
       </div>
     </Layout>
   );
