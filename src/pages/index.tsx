@@ -43,6 +43,9 @@ const Home = () => {
                   <button className="cta-button">Start Tracking</button>
                 </Link>
               </div>
+              <div>
+                <button onClick={() => void signOut()}>sign out</button>
+              </div>
             </div>
           </div>
         </main>
