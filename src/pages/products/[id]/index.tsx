@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import Layout from "~/components/Layout";
+import Loading from "~/components/Loading";
 import PriceInfoCard from "~/components/PriceInfoCard";
 import { api } from "~/utils/api";
 
@@ -18,8 +19,11 @@ const ProductDetails = () => {
   }
 
   if (isLoading) {
-    // TODO: Loading component
-    return <span>Loading...</span>;
+    return (
+      <div className="flex h-screen w-screen items-center justify-center">
+        <Loading />
+      </div>
+    );
   }
 
   if (isError) {
