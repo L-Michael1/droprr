@@ -3,6 +3,22 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { z } from "zod";
 
 export const productRouter = createTRPCRouter({
+  getById: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.session?.user?.id;
+
+      const product = await ctx.db.product.findFirst({
+        where: { id: input.id, userId },
+      });
+
+      return product;
+    }),
+
   getAll: protectedProcedure.query(async ({ ctx }) => {
     const userId = ctx.session?.user?.id;
 

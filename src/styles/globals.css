@@ -15,5 +15,5 @@
 }
 
 .cta-button {
-  @apply bg-primary rounded-md p-3 text-lg font-semibold transition-all duration-200 hover:bg-green-600;
+  @apply rounded-md bg-primary p-3 text-lg font-semibold transition-all duration-200 hover:bg-green-600;
 }
