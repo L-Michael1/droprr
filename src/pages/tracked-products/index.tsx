@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import Layout from "~/components/Layout";
+import Loading from "~/components/Loading";
 import ProductCard from "~/components/ProductCard";
 import Searchbar from "~/components/Searchbar";
 import { api } from "~/utils/api";
@@ -18,8 +19,13 @@ const Products = () => {
   const { data, isLoading, isError } = api.product.getAll.useQuery();
 
   if (isLoading) {
-    // TODO: Loading component
-    return <div>Loading...</div>;
+    return (
+      <Layout>
+        <div className="flex h-96 items-center justify-center">
+          <Loading />
+        </div>
+      </Layout>
+    );
   }
 
   if (isError) {
