@@ -49,7 +49,7 @@ const ProductCard = ({
 
           <p className="text-lg font-semibold text-black">
             <span>{currency}</span>
-            <span>{currentPrice}</span>
+            <span>{currentPrice.toFixed(2)}</span>
           </p>
         </div>
       </div>
