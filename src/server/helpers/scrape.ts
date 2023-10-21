@@ -24,7 +24,6 @@ export function extractPrice(...elements: cheerio.Cheerio<cheerio.Element>[]) {
 
     if (priceText) {
       const cleanPrice = priceText.replace(/[^\d.]/g, "");
-
       let firstPrice;
 
       if (cleanPrice) {
@@ -37,6 +36,32 @@ export function extractPrice(...elements: cheerio.Cheerio<cheerio.Element>[]) {
 
   return "";
 }
+
+export const extractOriginalPrice = (
+  ...elements: cheerio.Cheerio<cheerio.Element>[]
+) => {
+  let greatestPrice = 0;
+
+  for (const element of elements) {
+    const priceText = element.text().trim();
+
+    if (priceText) {
+      let cleanPrice = priceText.replace(/[^\d.]/g, "");
+      let firstPrice;
+
+      if (cleanPrice) {
+        firstPrice = cleanPrice.match(/\d+\.\d{2}/)?.[0];
+        while (firstPrice) {
+          greatestPrice = Math.max(parseFloat(firstPrice), greatestPrice);
+          cleanPrice = cleanPrice.replace(firstPrice, "");
+          firstPrice = cleanPrice.match(/\d+\.\d{2}/)?.[0];
+        }
+      }
+      // console.log("Greatest price", greatestPrice);
+      return greatestPrice;
+    }
+  }
+};
 
 export const scrapeProduct = async (productUrl: string) => {
   try {
@@ -56,14 +81,17 @@ export const scrapeProduct = async (productUrl: string) => {
 
     // TODO: extracting price is a bit messy, need to refactor
     const currentPrice = extractPrice(
-      $(".priceToPay span.a-price-whole"),
+      $(".priceToPay span.a-offscreen"),
       $(".a.size.base.a-color-price"),
       $(".a-button-selected .a-color-base"),
+      $("span.a-price.a-text-price.a-size-base span.a-offscreen"),
     );
 
-    const originalPrice = extractPrice(
+    const originalPrice = extractOriginalPrice(
       $("#priceblock_ourprice"),
       $(".a-price.a-text-price span.a-offscreen"),
+      $("span.a-price.a-text-price.a-size-base span.a-offscreen"),
+      $("td.a-color-secondary span.a-price.a-text-price span.a-offscreen"),
       $("#listPrice"),
       $("#priceblock_dealprice"),
       $(".a-size-base.a-color-price"),

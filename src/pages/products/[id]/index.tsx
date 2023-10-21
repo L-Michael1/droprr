@@ -63,11 +63,11 @@ const ProductDetails = () => {
               <div className="flex w-full flex-wrap items-center gap-10 border-y border-y-[#E4E4E4] py-6">
                 <div className="flex flex-col gap-2">
                   <p className="text-[34px] font-bold">
-                    {data.currency} {data.currentPrice}
+                    {data.currency} {data.currentPrice.toFixed(2)}
                   </p>
                   {data.currentPrice < data.originalPrice && (
                     <p className="text-[21px] text-black line-through opacity-50">
-                      {data.currency} {data.originalPrice}
+                      {data.currency} {data.originalPrice.toFixed(2)}
                     </p>
                   )}
                 </div>
@@ -79,22 +79,22 @@ const ProductDetails = () => {
                   <PriceInfoCard
                     title="Current Price"
                     iconSrc="/assets/icons/price-tag.svg"
-                    value={`${data.currency} ${data.currentPrice}`}
+                    value={`${data.currency} ${data.currentPrice.toFixed(2)}`}
                   />
                   <PriceInfoCard
                     title="Average Price"
                     iconSrc="/assets/icons/chart.svg"
-                    value={`${data.currency} ${data.averagePrice}`}
+                    value={`${data.currency} ${data.averagePrice.toFixed(2)}`}
                   />
                   <PriceInfoCard
                     title="Highest Price"
                     iconSrc="/assets/icons/arrow-up.svg"
-                    value={`${data.currency} ${data.highestPrice}`}
+                    value={`${data.currency} ${data.highestPrice.toFixed(2)}`}
                   />
                   <PriceInfoCard
                     title="Lowest Price"
                     iconSrc="/assets/icons/arrow-down.svg"
-                    value={`${data.currency} ${data.lowestPrice}`}
+                    value={`${data.currency} ${data.lowestPrice.toFixed(2)}`}
                   />
                 </div>
               </div>
