@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 import React from "react";
 import Layout from "~/components/Layout";
 import Loading from "~/components/Loading";
@@ -14,8 +15,32 @@ const ProductDetails = () => {
   const { data, isLoading, isLoadingError, isError } =
     api.product.getById.useQuery({ id });
 
+  const { mutate, isLoading: isMutationLoading } =
+    api.product.delete.useMutation({
+      onSuccess: () => {
+        toast.success("Removed from tracked products");
+        void router.push("/tracked-products");
+      },
+      onError: (e) => {
+        const errorMessage = e.data?.zodError?.fieldErrors?.content;
+        if (errorMessage?.[0]) {
+          toast.error(errorMessage[0]);
+        } else {
+          toast.error(e.message);
+        }
+      },
+    });
+
   if (isLoadingError) {
     return <span>Unauthorized</span>;
+  }
+
+  if (isMutationLoading) {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center">
+        <Loading />
+      </div>
+    );
   }
 
   if (isLoading) {
@@ -100,7 +125,12 @@ const ProductDetails = () => {
               </div>
 
               <div className="flex w-full">
-                <button className="w-full rounded-md bg-red-400 p-3 text-lg font-semibold transition-all duration-200 hover:bg-red-500">
+                <button
+                  className="w-full rounded-md bg-red-400 p-3 text-lg font-semibold transition-all duration-200 hover:bg-red-500"
+                  onClick={() => {
+                    mutate({ id: data.id });
+                  }}
+                >
                   Untrack
                 </button>
               </div>

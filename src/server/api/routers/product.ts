@@ -81,4 +81,30 @@ export const productRouter = createTRPCRouter({
         throw error;
       }
     }),
+
+  delete: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const userId = ctx.session?.user?.id;
+
+        // Check if product is being tracked by the user
+        const trackedProduct = await ctx.db.product.findFirst({
+          where: { userId, id: input.id },
+        });
+
+        // Product not being tracked
+        if (!trackedProduct) {
+          throw new Error("Product is not being tracked");
+        }
+
+        await ctx.db.product.delete({
+          where: { id: input.id },
+        });
+
+        return true;
+      } catch (error) {
+        throw error;
+      }
+    }),
 });
