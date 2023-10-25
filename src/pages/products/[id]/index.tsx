@@ -7,6 +7,8 @@ import Layout from "~/components/Layout";
 import Loading from "~/components/Loading";
 import PriceInfoCard from "~/components/PriceInfoCard";
 import { api } from "~/utils/api";
+import { PiChartLine, PiChartLineDown, PiChartLineUp } from "react-icons/pi";
+import { IoIosPricetag } from "react-icons/io";
 
 const ProductDetails = () => {
   const router = useRouter();
@@ -52,7 +54,7 @@ const ProductDetails = () => {
   }
 
   if (isError) {
-    return <span>Something went wrong...</span>;
+    return <span>Someg went wrong...</span>;
   }
 
   if (!data) {
@@ -64,7 +66,7 @@ const ProductDetails = () => {
       <div className="flex flex-col flex-wrap gap-16 px-6 py-10 md:px-20">
         <div className="flex flex-col gap-12 xl:flex-row xl:gap-28">
           {/* Image container */}
-          <div className="flex max-w-full flex-grow rounded-[17px] border border-[#CDDBFF] py-16 xl:max-w-[50%]">
+          <div className="flex max-w-full flex-grow rounded-[17px] border border-gray-200 py-16 xl:max-w-[50%]">
             <Image
               src={data.image}
               alt={data.name}
@@ -80,9 +82,15 @@ const ProductDetails = () => {
               {/* Content Header */}
               <div className="flex flex-col gap-3">
                 <p className="text-[28px] font-semibold">{data.name}</p>
-                <Link href={data.url} target="_blank" className="opacity-50">
-                  Visit Product
-                </Link>
+                <div>
+                  <Link
+                    href={data.url}
+                    target="_blank"
+                    className="hover:text-accent text-lg opacity-60 transition-all duration-200"
+                  >
+                    Visit Product
+                  </Link>
+                </div>
               </div>
 
               <div className="flex w-full flex-wrap items-center gap-10 border-y border-y-[#E4E4E4] py-6">
@@ -103,22 +111,26 @@ const ProductDetails = () => {
                 <div className="flex flex-wrap gap-5">
                   <PriceInfoCard
                     title="Current Price"
-                    iconSrc="/assets/icons/price-tag.svg"
+                    icon={
+                      <IoIosPricetag size={28} className="text-green-400" />
+                    }
                     value={`${data.currency} ${data.currentPrice.toFixed(2)}`}
                   />
                   <PriceInfoCard
                     title="Average Price"
-                    iconSrc="/assets/icons/chart.svg"
+                    icon={<PiChartLine size={28} className="text-slate-400" />}
                     value={`${data.currency} ${data.averagePrice.toFixed(2)}`}
                   />
                   <PriceInfoCard
                     title="Highest Price"
-                    iconSrc="/assets/icons/arrow-up.svg"
+                    icon={<PiChartLineUp size={28} className="text-red-400" />}
                     value={`${data.currency} ${data.highestPrice.toFixed(2)}`}
                   />
                   <PriceInfoCard
                     title="Lowest Price"
-                    iconSrc="/assets/icons/arrow-down.svg"
+                    icon={
+                      <PiChartLineDown size={28} className="text-blue-400" />
+                    }
                     value={`${data.currency} ${data.lowestPrice.toFixed(2)}`}
                   />
                 </div>
@@ -126,7 +138,7 @@ const ProductDetails = () => {
 
               <div className="flex w-full">
                 <button
-                  className="w-full rounded-md bg-red-400 p-3 text-lg font-semibold transition-all duration-200 hover:bg-red-500"
+                  className="w-full rounded-md bg-red-400 p-3 text-lg font-semibold transition-all duration-200 hover:brightness-90"
                   onClick={() => {
                     mutate({ id: data.id });
                   }}
