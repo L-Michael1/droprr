@@ -40,11 +40,11 @@ const Searchbar = () => {
   return (
     <div className="mt-12 flex flex-wrap gap-4 px-6 py-4 md:px-20">
       <input
-        type="text"
+        type="url"
         value={link}
         disabled={isLoading}
         placeholder="Enter Amazon product link"
-        className="w-full min-w-[200px] flex-1 rounded-md border border-gray-300 p-3 text-gray-500 shadow-sm focus:outline-1 focus:outline-green-300"
+        className="focus:outline-accent text-accent w-full min-w-[200px] flex-1 rounded-md border border-gray-300 p-3 shadow-sm focus:outline-1"
         onChange={(e) => setLink(e.target.value)}
         onKeyDown={handleKeyboardSubmit}
       />
