@@ -5,7 +5,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#22c55e",
+        heading: "#5b5b71",
+        accent: "#6c6c91",
       },
       fontFamily: {
         sans: ["var(--font-walsheim)"],

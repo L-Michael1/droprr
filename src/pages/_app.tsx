@@ -10,7 +10,7 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 
 const walsheim = localFont({
-  src: "./GTWalsheimProRegular.woff2",
+  src: "../../public/fonts/GTWalsheimProRegular.woff2",
   variable: "--font-walsheim",
 });
 
