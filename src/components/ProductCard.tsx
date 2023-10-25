@@ -11,14 +11,7 @@ const ProductCard = ({
   image,
   name,
   currentPrice,
-  originalPrice,
-  lowestPrice,
-  highestPrice,
-  averagePrice,
   currency,
-  isOutOfStock,
-  userId,
-  createdAt,
 }: Product) => {
   return (
     <div className="flex w-full flex-1 flex-col gap-4 rounded-md border border-gray-200 p-4 sm:w-[292px] sm:max-w-[292px] ">
@@ -34,15 +27,13 @@ const ProductCard = ({
 
       <div className="flex flex-col gap-3">
         <Link href={url} target="_blank">
-          <h3 className="truncate text-xl font-semibold leading-6 text-gray-900">
-            {name}
-          </h3>
+          <h3 className="truncate text-xl font-semibold leading-6">{name}</h3>
         </Link>
 
         <div className="flex justify-between">
           <Link
             href={`products/${id}`}
-            className="text-lg capitalize text-black opacity-50"
+            className="hover:text-accent text-lg capitalize text-black opacity-50 transition-colors duration-200"
           >
             View Details
           </Link>
