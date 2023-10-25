@@ -1,13 +1,24 @@
+import Head from "next/head";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+interface iLayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout = ({ children }: iLayoutProps) => {
   return (
-    <main className="max-w-8xl mx-auto">
-      <Navbar />
-      {children}
-      {/* <Footer /> */}
-    </main>
+    <>
+      {/* Default metadata */}
+      <Head>
+        <title>droprr</title>
+        <meta name="description" content="Amazon product price tracker" />
+        <link rel="icon" href="/assets/droprr.svg" />
+      </Head>
+      <main className="mx-auto max-w-8xl">
+        <Navbar />
+        {children}
+      </main>
+    </>
   );
 };
 
