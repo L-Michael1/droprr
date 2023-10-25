@@ -8,7 +8,7 @@ export default {
         primary: "#22c55e",
       },
       fontFamily: {
-        inter: ["Inter", "sans-serif"],
+        sans: ["var(--font-walsheim)"],
       },
       maxWidth: {
         "8xl": "90rem",
