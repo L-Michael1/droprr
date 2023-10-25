@@ -1,12 +1,10 @@
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Carousel from "~/components/Carousel";
 import Layout from "~/components/Layout";
 
 const Home = () => {
-  const router = useRouter();
   const { data: session } = useSession();
 
   return (
@@ -33,13 +31,10 @@ const Home = () => {
               </p>
 
               <div className="mt-6">
-                <Link href="/tracked-products">
+                <Link href={session ? "/tracked-products" : "/auth/signin"}>
                   <button className="cta-button">Start Tracking</button>
                 </Link>
               </div>
-              {/* <div>
-                <button onClick={() => void signOut()}>sign out</button>
-              </div> */}
             </div>
           </div>
         </div>

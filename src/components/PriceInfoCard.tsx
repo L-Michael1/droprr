@@ -1,6 +1,4 @@
-import Image from "next/image";
 import React from "react";
-import type { IconType } from "react-icons";
 
 interface IPriceInfoCardProps {
   title: string;
