@@ -9,6 +9,7 @@ import { BsDiscord, BsGoogle } from "react-icons/bs";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { RiBearSmileLine } from "react-icons/ri";
 
 // Pre-render and get providers for SignIn component
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -53,23 +54,23 @@ export default function SignIn({
         <title>Sign in to droprr</title>
         <meta name="description" content="Amazon product price tracker" />
       </Head>
-      <div className="fade-in flex min-h-screen flex-col items-center justify-center pb-24">
+      <div className="flex min-h-screen flex-col items-center justify-center pb-24">
         {/* Heading */}
         <Link className="text-gray-300 duration-200" href="/">
-          <h1 className="mb-2 text-3xl font-semibold transition-all duration-200 hover:text-blue-400">
-            droprr
-          </h1>
+          <div className="mb-2 inline-flex items-center gap-1 transition-all duration-300 hover:brightness-90">
+            <RiBearSmileLine size={"2rem"} className="text-accent" />
+            <h1 className="text-accent text-3xl font-semibold tracking-wider">
+              droprr
+            </h1>
+          </div>
         </Link>
 
         {/* Form */}
         <section
           aria-label="Sign in form"
-          className="flex flex-col justify-center rounded-lg border border-y border-zinc-700
-        bg-zinc-800 px-12 py-8 text-center shadow sm:px-16"
+          className="flex flex-col justify-center rounded-lg border bg-[#F2F4F7] px-12 py-8 text-center shadow sm:px-16"
         >
-          <span className="text-sm font-medium text-zinc-400">
-            Sign in with
-          </span>
+          <span className="text-sm font-medium">Sign in with</span>
 
           {/* Providers */}
           <section>
@@ -78,9 +79,8 @@ export default function SignIn({
                 <div key={provider.name}>
                   <button
                     type="button"
-                    className="inline-flex w-36 items-center justify-center rounded-md border border-zinc-700 
-                  bg-zinc-800 px-6 py-3 text-lg font-medium text-white shadow-sm duration-200 hover:bg-zinc-700
-                  hover:text-zinc-100"
+                    className="bg-accent inline-flex w-36 items-center justify-center rounded-md  
+                   px-6 py-3 text-lg font-medium text-white shadow-md duration-200 hover:brightness-90"
                     onClick={() => void signIn(provider.id)}
                   >
                     {provider.icon}
@@ -95,11 +95,11 @@ export default function SignIn({
           <footer>
             <p className="mt-6 max-w-[10rem] text-xs leading-5 sm:max-w-[12rem]">
               By signing in, you agree to our{" "}
-              <a className="text-blue-400" href="/terms-of-service">
+              <a className="text-accent" href="/terms-of-service">
                 Terms of Service
               </a>{" "}
               and{" "}
-              <a className="text-blue-400" href="/privacy-policy">
+              <a className="text-accent" href="/privacy-policy">
                 Privacy Policy
               </a>
             </p>
