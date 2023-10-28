@@ -44,7 +44,7 @@ const Searchbar = () => {
         value={link}
         disabled={isLoading}
         placeholder="Enter Amazon product link"
-        className="focus:outline-accent text-accent w-full min-w-[200px] flex-1 rounded-md border border-gray-300 p-3 shadow-sm focus:outline-1"
+        className="w-full min-w-[200px] flex-1 rounded-md border border-gray-300 p-3 text-accent shadow-sm focus:outline-1 focus:outline-accent"
         onChange={(e) => setLink(e.target.value)}
         onKeyDown={handleKeyboardSubmit}
       />
