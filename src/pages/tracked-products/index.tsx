@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
+import InstructionModal from "~/components/InstructionModal";
 import Layout from "~/components/Layout";
 import Loading from "~/components/Loading";
 import ProductCard from "~/components/ProductCard";
@@ -39,6 +40,7 @@ const Products = () => {
 
   return (
     <Layout>
+      <InstructionModal />
       <Searchbar />
       <div className="flex w-full justify-center px-6 py-12 md:px-20">
         <div className="flex w-full flex-wrap gap-x-9 gap-y-16">
