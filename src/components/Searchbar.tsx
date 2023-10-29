@@ -1,8 +1,12 @@
-import React, { useState, type KeyboardEvent } from "react";
+import React, { useState, type KeyboardEvent, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { api } from "~/utils/api";
 
-const Searchbar = () => {
+interface iSearchbarProps {
+  setIsMutationLoading: (value: boolean) => void;
+}
+
+const Searchbar = ({ setIsMutationLoading }: iSearchbarProps) => {
   const [link, setLink] = useState<string>("");
 
   const ctx = api.useContext();
@@ -22,6 +26,10 @@ const Searchbar = () => {
       }
     },
   });
+
+  useEffect(() => {
+    setIsMutationLoading(isLoading);
+  }, [setIsMutationLoading, isLoading]);
 
   const handleClickSubmit = () => {
     if (link !== "") {
