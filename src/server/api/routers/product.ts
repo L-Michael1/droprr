@@ -20,7 +20,6 @@ export const productRouter = createTRPCRouter({
     }),
 
   getAll: protectedProcedure.query(async ({ ctx }) => {
-    console.log("HELLO")
     const userId = ctx.session?.user?.id;
 
     const products = await ctx.db.product.findMany({
@@ -74,8 +73,6 @@ export const productRouter = createTRPCRouter({
             },
           },
         });
-
-        console.log(product);
 
         return product;
       } catch (error) {
