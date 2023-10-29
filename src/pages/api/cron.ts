@@ -93,7 +93,7 @@ export default async function handler(
         return product;
       }),
     );
-    res.status(200).json({ message: "Hello from Next.js!", updatedProducts });
+    res.status(200).json({ message: "Updated products", updatedProducts });
   } catch (error) {
     console.log(error);
     res
