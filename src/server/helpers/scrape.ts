@@ -18,6 +18,43 @@ const isAmazonUrl = (url: string) => {
   }
 };
 
+type PriceHistoryItem = {
+  id: string;
+  productId: string;
+  price: number;
+};
+
+export function getHighestPrice(priceList: PriceHistoryItem[]) {
+  let highestPrice = priceList[0];
+
+  priceList.forEach((price) => {
+    if (price.price > highestPrice!.price) {
+      highestPrice = price;
+    }
+  });
+
+  return highestPrice!.price;
+}
+
+export function getLowestPrice(priceList: PriceHistoryItem[]) {
+  let lowestPrice = priceList[0];
+
+  priceList.forEach((price) => {
+    if (price.price < lowestPrice!.price) {
+      lowestPrice = price;
+    }
+  });
+
+  return lowestPrice!.price;
+}
+
+export function getAveragePrice(priceList: PriceHistoryItem[]) {
+  const sumOfPrices = priceList.reduce((acc, curr) => acc + curr.price, 0);
+  const averagePrice = sumOfPrices / priceList.length || 0;
+
+  return averagePrice;
+}
+
 export function extractPrice(...elements: cheerio.Cheerio<cheerio.Element>[]) {
   for (const element of elements) {
     const priceText = element.text().trim();
