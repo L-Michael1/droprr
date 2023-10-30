@@ -8,6 +8,7 @@ import ProductCard from "~/components/ProductCard";
 import Searchbar from "~/components/Searchbar";
 import SortMenu from "~/components/SortMenu";
 import { api } from "~/utils/api";
+import { RiBearSmileFill } from "react-icons/ri";
 
 const Products = () => {
   const router = useRouter();
@@ -64,8 +65,10 @@ const Products = () => {
             })}
           </div>
         ) : (
-          // TODO
-          <div>No products yet..</div>
+          <div className="mt-2 flex flex-col items-center">
+            <p className="text-lg">Track your first product!</p>
+            <RiBearSmileFill color={"#6c6c91"} size={"3.5rem"} />
+          </div>
         )}
       </div>
     </Layout>
