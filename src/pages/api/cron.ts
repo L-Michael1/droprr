@@ -17,8 +17,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>,
 ) {
+  const authHeader = req.headers?.authorization;
+
+  if (!authHeader || authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return res
+      .status(401)
+      .json({ message: "Unauthorized", updatedProducts: [] });
+  }
+
   try {
-    // const { data: products } = db.product.getAll.useQuery();
     const products = await db.product.findMany({
       orderBy: [{ createdAt: "asc" }],
       select: {
@@ -93,7 +100,7 @@ export default async function handler(
         return product;
       }),
     );
-    res.status(200).json({ message: "Updated products", updatedProducts });
+    res.status(200).json({ message: "Success", updatedProducts });
   } catch (error) {
     console.log(error);
     res
