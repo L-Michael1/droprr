@@ -39,6 +39,9 @@ export const env = createEnv({
     // Nodemailer configuration
     EMAIL_USER: z.string(),
     EMAIL_PASS: z.string(),
+
+    // CRON configuration
+    CRON_SECRET: z.string(),
   },
 
   /**
@@ -66,6 +69,7 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
     EMAIL_USER: process.env.EMAIL_USER,
     EMAIL_PASS: process.env.EMAIL_PASS,
+    CRON_SECRET: process.env.CRON_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
