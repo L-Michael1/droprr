@@ -20,7 +20,7 @@ jobs:
         #   --health-timeout 5s
         #   --health-retries 5
         ports:
-          - 8080:8080
+          - 3306:3306
 
     steps:
       - name: Checkout
@@ -37,12 +37,10 @@ jobs:
           echo "NEXTAUTH_SECRET=supersecret" >> .env
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Push schema to database
-        run: |
-          npx prisma db pull
-          npx prisma db push
+        run: npm run db:push
 
       - name: Build application
         run: npm run build
