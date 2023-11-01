@@ -40,7 +40,9 @@ jobs:
         run: npm ci
 
       - name: Push schema to database
-        run: npx prisma db push
+        run: |
+          npx prisma db pull
+          npx prisma db push
 
       - name: Build application
         run: npm run build
