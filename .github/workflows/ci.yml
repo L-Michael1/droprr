@@ -32,9 +32,7 @@ jobs:
           node-version: "21.x"
 
       - name: Setup environment variables
-        run: |
-          cp .env.example .env
-          echo "NEXTAUTH_SECRET=supersecret" >> .env
+        run: cp .env.example .env
 
       - name: Install dependencies
         run: npm install
