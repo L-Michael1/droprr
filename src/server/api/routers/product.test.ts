@@ -1,66 +1,90 @@
-// import { expect, test, vi, describe, beforeEach } from "vitest";
-// import { createInnerTRPCContext } from "../trpc";
-// import { productRouter } from "./product";
-// import type { AppRouter } from "../root";
-// import type { inferProcedureInput } from "@trpc/server";
-// import db from "~/server/__mocks__/db";
+import { expect, test, describe } from "vitest";
+import { createInnerTRPCContext } from "../trpc";
+import { productRouter } from "./product";
+import type { AppRouter } from "../root";
+import type { inferProcedureInput } from "@trpc/server";
+import { db } from "~/server/db";
 
-// // Mock prisma module
-// vi.mock("../../db");
+describe("Product router", () => {
+  test("unauthed user should not be possible to create a product", async () => {
+    const ctx = createInnerTRPCContext({ session: null });
+    const caller = productRouter.createCaller(ctx);
 
-// describe("Product router", () => {
-//   test("Create & fetch product", async () => {
-//     beforeEach(() => {
-//       vi.restoreAllMocks();
-//     });
+    type CreateInput = inferProcedureInput<AppRouter["product"]["create"]>;
+    const input: CreateInput = {
+      url: "https://www.amazon.ca/Sony-WH-1000XM4-Canceling-Headphones-WH1000XM4/dp/B0863TXGM3?th=1",
+    };
 
-//     // Mock session for protected procedures
-//     const ctx = createInnerTRPCContext({
-//       session: {
-//         user: { id: "1", name: "John Doe" },
-//         expires: "1",
-//       },
-//     });
+    await expect(caller.create(input)).rejects.toThrowError();
+  });
 
-//     const caller = productRouter.createCaller({ ...ctx, db });
+  test("creating an existing product should throw an error", async () => {
+    const ctx = createInnerTRPCContext({
+      session: {
+        user: { id: "1", name: "John Doe" },
+        expires: "1",
+      },
+    });
 
-//     type CreateInput = inferProcedureInput<AppRouter["product"]["create"]>;
-//     const createInput: CreateInput = {
-//       url: "https://www.amazon.com/Philips-Kitchen-Appliances-Technology-91/dp/B08SJ6L9MT",
-//     };
+    const caller = productRouter.createCaller({ ...ctx, db });
 
-//     await caller.create(createInput);
+    type CreateInput = inferProcedureInput<AppRouter["product"]["create"]>;
+    const input: CreateInput = {
+      url: "https://www.amazon.com",
+    };
 
-//     // console.log(product);
+    await expect(caller.create(input)).rejects.toThrowError();
+  });
 
-//     // type GetByIdInput = inferProcedureInput<AppRouter["product"]["getById"]>;
-//     // const input: GetByIdInput = {
-//     //   id: product.id,
-//     // };
-//   }, 30000);
-// });
+  test("get a product by id", async () => {
+    const ctx = createInnerTRPCContext({
+      session: {
+        user: { id: "1", name: "John Doe" },
+        expires: "1",
+      },
+    });
 
-//   const fetchedProduct = await caller.getById(input);
+    const caller = productRouter.createCaller({ ...ctx, db });
 
-//   expect(fetchedProduct).toMatchObject(product);
-// });
+    type GetByIdInput = inferProcedureInput<AppRouter["product"]["getById"]>;
+    const input: GetByIdInput = {
+      id: "1",
+    };
 
-import { type inferProcedureInput } from "@trpc/server";
-import { expect, test } from "vitest";
+    const product = await caller.getById(input);
 
-import { appRouter, type AppRouter } from "~/server/api/root";
-import { createInnerTRPCContext } from "~/server/api/trpc";
+    expect(product).not.toBeNull();
+    expect(product?.id).toBe("1");
+    expect(product?.url).toBe("https://www.amazon.com");
+    expect(product?.image).toBe("image");
+    expect(product?.name).toBe("Test Product");
+    expect(product?.currentPrice).toBe(100);
+    expect(product?.originalPrice).toBe(150);
+    expect(product?.lowestPrice).toBe(50);
+    expect(product?.highestPrice).toBe(200);
+    expect(product?.averagePrice).toBe(125);
+    expect(product?.isOutOfStock).toBe(false);
+    expect(product?.currency).toBe("$");
+    expect(product?.userId).toBe("1");
+  });
 
-test("example router", async () => {
-  const ctx = createInnerTRPCContext({ session: null });
-  const caller = appRouter.createCaller(ctx);
+  test("delete a product by id", async () => {
+    const ctx = createInnerTRPCContext({
+      session: {
+        user: { id: "1", name: "John Doe" },
+        expires: "1",
+      },
+    });
 
-  type Input = inferProcedureInput<AppRouter["example"]["hello"]>;
-  const input: Input = {
-    text: "test",
-  };
+    const caller = productRouter.createCaller({ ...ctx, db });
 
-  const example = await caller.example.hello(input);
+    type DeleteInput = inferProcedureInput<AppRouter["product"]["delete"]>;
+    const input: DeleteInput = {
+      id: "1",
+    };
 
-  expect(example).toMatchObject({ greeting: "Hello test" });
+    const result = await caller.delete(input);
+
+    expect(result).toBe(true);
+  });
 });

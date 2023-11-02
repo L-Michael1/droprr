@@ -36,6 +36,9 @@ jobs:
       - name: Push schema to database
         run: npm run db:push
 
+      - name: Seed database with test data
+        run: npm run seed
+
       - name: Build application
         run: npm run build
 

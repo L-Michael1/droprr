@@ -5,7 +5,6 @@ export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   process.env = Object.assign(process.env, loadEnv(mode, process.cwd(), ""));
   return {
-    // vite config
     plugins: [tsconfigPaths()],
   };
 });
