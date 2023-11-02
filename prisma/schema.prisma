@@ -54,6 +54,32 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    products      Product[]
+}
+
+model Product {
+    id                  String   @id @default(cuid())
+    url                 String   @db.Text
+    image               String   @db.Text
+    name                String   @db.Text
+    currentPrice        Float    @default(0)
+    originalPrice       Float    @default(0)
+    lowestPrice         Float    @default(0)
+    highestPrice        Float    @default(0)
+    averagePrice        Float    @default(0)
+    isOutOfStock        Boolean  @default(false)
+    currency            String   @default("$")
+    priceHistory        PriceHistory[]
+    userId              String
+    createdAt           DateTime @default(now())
+    user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PriceHistory {
+    id                  String  @id @default(cuid())
+    productId           String
+    price               Float
+    product             Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {

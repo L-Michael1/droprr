@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    @apply font-sans tracking-normal;
+  }
+}
+
+.cta-button {
+  @apply bg-accent rounded-lg p-3 text-lg font-medium text-white transition-all duration-200 hover:brightness-90;
+}
