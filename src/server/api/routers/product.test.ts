@@ -87,4 +87,22 @@ describe("Product router", () => {
 
     expect(result).toBe(true);
   });
+
+  test("deleting a non-existent product should throw an error", async () => {
+    const ctx = createInnerTRPCContext({
+      session: {
+        user: { id: "1", name: "John Doe" },
+        expires: "1",
+      },
+    });
+
+    const caller = productRouter.createCaller({ ...ctx, db });
+
+    type DeleteInput = inferProcedureInput<AppRouter["product"]["delete"]>;
+    const input: DeleteInput = {
+      id: "1",
+    };
+
+    await expect(caller.delete(input)).rejects.toThrowError();
+  });
 });
