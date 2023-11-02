@@ -15,5 +15,9 @@
 }
 
 .cta-button {
-  @apply bg-accent rounded-lg p-3 text-lg font-medium text-white transition-all duration-200 hover:brightness-90;
+  @apply rounded-lg bg-accent p-3 text-lg font-medium text-white transition-all duration-200 hover:brightness-90;
+}
+
+.cta-button-loading {
+  @apply rounded-lg bg-accent p-3 text-lg font-medium text-white opacity-60;
 }

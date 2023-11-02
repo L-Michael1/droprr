@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
@@ -6,6 +7,7 @@ import Layout from "~/components/Layout";
 
 const Home = () => {
   const { data: session } = useSession();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
     <>
@@ -32,7 +34,13 @@ const Home = () => {
 
               <div className="mt-6">
                 <Link href={session ? "/tracked-products" : "/auth/signin"}>
-                  <button className="cta-button">Start Tracking</button>
+                  <button
+                    disabled={isLoading}
+                    onClick={() => setIsLoading(true)}
+                    className={isLoading ? "cta-button-loading" : "cta-button"}
+                  >
+                    Start Tracking
+                  </button>
                 </Link>
               </div>
             </div>
