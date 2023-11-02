@@ -46,7 +46,13 @@ const Products = () => {
 
       <Searchbar setIsMutationLoading={setIsMutationLoading} />
       {data.length !== 0 && (
-        <div className="flex px-6 md:px-20">
+        <div
+          className={
+            isMutationLoading
+              ? `pointer-events-none flex px-6 opacity-40 md:px-20`
+              : `flex px-6 md:px-20`
+          }
+        >
           <SortMenu sortOption={sortOption} setSortOption={setSortOption} />
         </div>
       )}
