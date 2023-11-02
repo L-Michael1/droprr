@@ -10,27 +10,35 @@ export const productRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
-      const userId = ctx.session?.user?.id;
+      try {
+        const userId = ctx.session?.user?.id;
 
-      const product = await ctx.db.product.findFirst({
-        where: { id: input.id, userId },
-      });
+        const product = await ctx.db.product.findFirst({
+          where: { id: input.id, userId },
+        });
 
-      return product;
+        return product;
+      } catch (error) {
+        throw error;
+      }
     }),
 
   getAll: protectedProcedure
     .input(z.object({ sort: z.string() }))
     .query(async ({ ctx, input }) => {
-      const userId = ctx.session?.user?.id;
-      const createdAt = input.sort === "New" ? "desc" : "asc";
+      try {
+        const userId = ctx.session?.user?.id;
+        const createdAt = input.sort === "New" ? "desc" : "asc";
 
-      const products = await ctx.db.product.findMany({
-        where: { userId },
-        orderBy: [{ createdAt }],
-      });
+        const products = await ctx.db.product.findMany({
+          where: { userId },
+          orderBy: [{ createdAt }],
+        });
 
-      return products;
+        return products;
+      } catch (error) {
+        throw error;
+      }
     }),
 
   create: protectedProcedure
