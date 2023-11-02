@@ -1,5 +1,5 @@
 <p align="center">
-   <img width="150px" height="150px" src="https://github.com/L-Michael1/droprr/assets/27537005/558588f1-7e49-461c-9a81-f51cfac030d6"/>
+   <img width="150px" height="150px" src="https://github.com/L-Michael1/droprr/assets/27537005/a85844d1-fba3-4cdc-b511-163b28e74263"/>
 </p>
 
 # droprr
@@ -30,4 +30,4 @@ I built the web-app using the T3 stack, composed of Next.js 13 (pages router), T
 ---
 
 ## Demo
-![droprr](https://github.com/L-Michael1/droprr/assets/27537005/aa759a58-87b0-45f6-8af0-63cc77f7aa27)
+![droprr](https://github.com/L-Michael1/droprr/assets/27537005/db1994df-dc98-4358-9858-cb5a13aa4e82)
