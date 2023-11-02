@@ -59,7 +59,7 @@ export default function SignIn({
         <Link className="text-gray-300 duration-200" href="/">
           <div className="mb-2 inline-flex items-center gap-1 transition-all duration-300 hover:brightness-90">
             <RiBearSmileLine size={"2rem"} className="text-accent" />
-            <h1 className="text-accent text-3xl font-semibold tracking-wider">
+            <h1 className="text-3xl font-semibold tracking-wider text-accent">
               droprr
             </h1>
           </div>
@@ -79,7 +79,7 @@ export default function SignIn({
                 <div key={provider.name}>
                   <button
                     type="button"
-                    className="bg-accent inline-flex w-36 items-center justify-center rounded-md  
+                    className="inline-flex w-36 items-center justify-center rounded-md bg-accent  
                    px-6 py-3 text-lg font-medium text-white shadow-md duration-200 hover:brightness-90"
                     onClick={() => void signIn(provider.id)}
                   >
